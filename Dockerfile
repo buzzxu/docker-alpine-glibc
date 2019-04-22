@@ -14,10 +14,14 @@ RUN apk add --no-cache --virtual=.build-dependencies curl wget binutils && \
   wget "https://www.archlinux.org/packages/core/x86_64/zlib/download" -O /tmp/libz.tar.xz && \
   mkdir -p /tmp/libz && \
   tar -xf /tmp/libz.tar.xz -C /tmp/libz && \
-  cp /tmp/libz/usr/lib/libz* /usr/glibc-compat/lib && \
-  strip /usr/glibc-compat/lib/libz.so.* &&\
+  mv /tmp/libz/usr/lib/libz.so* /usr/glibc-compat/lib && \
+  strip /usr/glibc-compat/lib/libz.so.* && \
   /usr/glibc-compat/sbin/ldconfig /lib /usr/glibc-compat/lib && \
   echo 'hosts: files mdns4_minimal [NOTFOUND=return] dns mdns4' >> /etc/nsswitch.conf && \
   apk del --purge .build-dependencies && \
-  apk add --no-cache -U font-adobe-100dpi ttf-dejavu fontconfig && \ 
+  apk add --no-cache -U font-adobe-100dpi ttf-dejavu fontconfig tzdata && \ 
+  cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \
+  apk del --purge tzdata && \
   rm -rf glibc.apk glibc-bin.apk /var/cache/apk/* /tmp/* 
+
+  ENV TZ Asia/Shanghai
