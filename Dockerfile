@@ -21,7 +21,6 @@ RUN apk add --no-cache --virtual=.build-dependencies curl wget binutils && \
   apk del --purge .build-dependencies && \
   apk add --no-cache -U font-adobe-100dpi ttf-dejavu fontconfig tzdata && \ 
   cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \
-  apk del --purge tzdata && \
   rm -rf glibc.apk glibc-bin.apk /var/cache/apk/* /tmp/* 
 
   ENV TZ Asia/Shanghai
