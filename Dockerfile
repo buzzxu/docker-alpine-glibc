@@ -1,4 +1,4 @@
-FROM alpine:3.9
+FROM alpine:latest
 
 LABEL MAINTAINER buzzxu <downloadxu@163.com>
 
