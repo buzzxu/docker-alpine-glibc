@@ -2,7 +2,7 @@ FROM alpine:latest
 
 LABEL MAINTAINER buzzxu <downloadxu@163.com>
 
-ENV GLIBC_VERSION 2.29-r0
+ENV GLIBC_VERSION 2.30-r0
 ENV LANG C.UTF-8
 
 # Download and install glibc,zlib
