@@ -45,12 +45,12 @@ RUN ALPINE_GLIBC_BASE_URL="https://github.com/sgerrand/alpine-pkg-glibc/releases
         "$ALPINE_GLIBC_BASE_PACKAGE_FILENAME" \
         "$ALPINE_GLIBC_BIN_PACKAGE_FILENAME" \
         "$ALPINE_GLIBC_I18N_PACKAGE_FILENAME" && \
-  apk add wqy-zenhei --update-cache --repository http://nl.alpinelinux.org/alpine/edge/testing --allow-untrusted && \      
+  # apk add wqy-zenhei --update-cache --repository http://nl.alpinelinux.org/alpine/edge/testing --allow-untrusted && \      
   apk update && apk add --no-cache -U font-adobe-100dpi ttf-dejavu fontconfig tzdata && \
   mv /opt/simsun.ttc /usr/share/fonts && \
   mv /opt/simsunb.ttf /usr/share/fonts && \
   fc-cache -f && \
   fc-list && \
   cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \
-  rm /var/cache/apk/* /tmp/* 
+  rm /var/cache/apk/* 
 
