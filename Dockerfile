@@ -38,15 +38,12 @@ RUN ALPINE_GLIBC_BASE_URL="https://github.com/sgerrand/alpine-pkg-glibc/releases
     apk del glibc-i18n && \
     \
     rm "/root/.wget-hsts" && \
-    apk del .build-dependencies && \
+    apk del --purge .build-dependencies && \
     rm \
         "$ALPINE_GLIBC_BASE_PACKAGE_FILENAME" \
         "$ALPINE_GLIBC_BIN_PACKAGE_FILENAME" \
         "$ALPINE_GLIBC_I18N_PACKAGE_FILENAME" && \
-  # echo 'http://mirrors.ustc.edu.cn/alpine/latest-stable/main' > /etc/apk/repositories && \
-  # echo 'http://mirrors.ustc.edu.cn/alpine/latest-stable/community' >>/etc/apk/repositories && \
-  apk update && apk add --no-cache -U font-adobe-100dpi ttf-dejavu fontconfig tzdata \
-  ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \ 
-  echo "Asia/Shanghai" > /etc/timezone && \
-  rm -rf glibc.apk glibc-bin.apk /var/cache/apk/* /tmp/* 
+  apk update && apk add --no-cache -U font-adobe-100dpi ttf-dejavu fontconfig tzdata && \
+  cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \
+  rm /var/cache/apk/* /tmp/* 
 
