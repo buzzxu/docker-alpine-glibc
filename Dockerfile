@@ -3,6 +3,7 @@ FROM alpine:latest
 LABEL MAINTAINER buzzxu <downloadxu@163.com>
 
 ENV LANG C.UTF-8
+ENV TZ Asia/Shanghai
 
 # Download and install glibc,zlib
 RUN ALPINE_GLIBC_BASE_URL="https://github.com/sgerrand/alpine-pkg-glibc/releases/download" && \
@@ -42,8 +43,8 @@ RUN ALPINE_GLIBC_BASE_URL="https://github.com/sgerrand/alpine-pkg-glibc/releases
         "$ALPINE_GLIBC_BASE_PACKAGE_FILENAME" \
         "$ALPINE_GLIBC_BIN_PACKAGE_FILENAME" \
         "$ALPINE_GLIBC_I18N_PACKAGE_FILENAME" && \
-  echo 'http://mirrors.ustc.edu.cn/alpine/latest-stable/main' > /etc/apk/repositories && \
-  echo 'http://mirrors.ustc.edu.cn/alpine/latest-stable/community' >>/etc/apk/repositories && \
+  # echo 'http://mirrors.ustc.edu.cn/alpine/latest-stable/main' > /etc/apk/repositories && \
+  # echo 'http://mirrors.ustc.edu.cn/alpine/latest-stable/community' >>/etc/apk/repositories && \
   apk update && apk add --no-cache -U font-adobe-100dpi ttf-dejavu fontconfig tzdata \
   ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \ 
   echo "Asia/Shanghai" > /etc/timezone && \
