@@ -2,10 +2,7 @@ FROM alpine:latest
 
 LABEL MAINTAINER buzzxu <downloadxu@163.com>
 
-# ADD fonts/simsun.ttc /opt/simsun.ttc
-# ADD fonts/simsunb.ttf /opt/simsunb.ttf
-
-ENV LANG C.UTF-8
+ENV LANG='en_US.UTF-8' LANGUAGE='en_US:en' LC_ALL='en_US.UTF-8'
 ENV TZ Asia/Shanghai
 
 # Download and install glibc,zlib
@@ -42,9 +39,6 @@ RUN apk add --no-cache --virtual .build-deps curl binutils \
     && rm -rf /tmp/*.apk /tmp/gcc /tmp/gcc-libs.tar.xz /tmp/libz /tmp/libz.tar.xz /var/cache/apk/* \
     && apk add --no-cache -U font-adobe-100dpi ttf-dejavu fontconfig tzdata  \ 
     && cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
-    # mv /opt/simsun.ttc /usr/share/fonts && \
-    # mv /opt/simsunb.ttf /usr/share/fonts && \
     && fc-cache -f \
     && fc-list \
     && rm -rf glibc.apk glibc-bin.apk /var/cache/apk/* /tmp/* 
-
