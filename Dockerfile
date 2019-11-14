@@ -40,11 +40,11 @@ RUN apk add --no-cache --virtual .build-deps curl binutils \
     && mv /tmp/libz/usr/lib/libz.so* /usr/glibc-compat/lib \
     && apk del --purge .build-deps glibc-i18n \
     && rm -rf /tmp/*.apk /tmp/gcc /tmp/gcc-libs.tar.xz /tmp/libz /tmp/libz.tar.xz /var/cache/apk/* \
-    && apk add --no-cache -U font-adobe-100dpi ttf-dejavu fontconfig tzdata && \ 
-    && cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \
+    && apk add --no-cache -U font-adobe-100dpi ttf-dejavu fontconfig tzdata  \ 
+    && cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
     # mv /opt/simsun.ttc /usr/share/fonts && \
     # mv /opt/simsunb.ttf /usr/share/fonts && \
-    && fc-cache -f && \
-    && fc-list && \
+    && fc-cache -f \
+    && fc-list \
     && rm -rf glibc.apk glibc-bin.apk /var/cache/apk/* /tmp/* 
 
