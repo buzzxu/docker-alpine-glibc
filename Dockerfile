@@ -3,7 +3,6 @@ FROM alpine:latest
 LABEL MAINTAINER buzzxu <downloadxu@163.com>
 
 ENV LANG='C.UTF-8' LC_ALL='C.UTF-8'
-ENV TZ Asia/Shanghai
 
 RUN ALPINE_GLIBC_BASE_URL="https://github.com/sgerrand/alpine-pkg-glibc/releases/download" && \
     ALPINE_GLIBC_PACKAGE_VERSION="2.32-r0" && \
@@ -31,7 +30,7 @@ RUN ALPINE_GLIBC_BASE_URL="https://github.com/sgerrand/alpine-pkg-glibc/releases
         "$ALPINE_GLIBC_I18N_PACKAGE_FILENAME" && \
     \
     rm -rf "/etc/apk/keys/sgerrand.rsa.pub" && \
-    /usr/glibc-compat/bin/localedef --force --inputfile POSIX --charmap UTF-8 "$LANG" || true && \
+    /usr/glibc-compat/bin/localedef -i C -f UTF-8 "$LANG" && \
     echo "export LANG=$LANG" > /etc/profile.d/locale.sh && \
     \
     apk del glibc-i18n && \
