@@ -4,7 +4,7 @@ LABEL MAINTAINER buzzxu <downloadxu@163.com>
 
 ENV LANG='C.UTF-8' LC_ALL='C.UTF-8'
 
-RUN ARCHLINUX_BASE_URL= "https://archive.archlinux.org/packages" && \
+RUN ARCHLINUX_BASE_URL="https://archive.archlinux.org/packages" && \
     ZLIB_VERSION="1.2.11-4" && \
     GCC_LIBS_VERSION="10.2.0-3" && \
     ALPINE_GLIBC_BASE_URL="https://github.com/sgerrand/alpine-pkg-glibc/releases/download" && \
