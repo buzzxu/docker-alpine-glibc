@@ -24,16 +24,7 @@ RUN ARCHLINUX_BASE_URL= "https://archive.archlinux.org/packages" && \
     wget "${ARCHLINUX_BASE_URL}/z/zlib/zlib-1%3A${ZLIB_VERSION}-x86_64.pkg.tar.xz" -O zlib.pkg.tar.xz && \
     tar xvJf zlib.pkg.tar.xz -C /tmp/zlib && \
     mv /tmp/zlib/usr/lib/libz.so* /usr/glibc-compat/lib && \
-    echo \
-        "-----BEGIN PUBLIC KEY-----\
-        MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEApZ2u1KJKUu/fW4A25y9m\
-        y70AGEa/J3Wi5ibNVGNn1gT1r0VfgeWd0pUybS4UmcHdiNzxJPgoWQhV2SSW1JYu\
-        tOqKZF5QSN6X937PTUpNBjUvLtTQ1ve1fp39uf/lEXPpFpOPL88LKnDBgbh7wkCp\
-        m2KzLVGChf83MS0ShL6G9EQIAUxLm99VpgRjwqTQ/KfzGtpke1wqws4au0Ab4qPY\
-        KXvMLSPLUp7cfulWvhmZSegr5AdhNw5KNizPqCJT8ZrGvgHypXyiFvvAH5YRtSsc\
-        Zvo9GI2e2MaZyo9/lvb+LbLEJZKEQckqRj4P26gmASrZEPStwc+yqy1ShHLA0j6m\
-        1QIDAQAB\
-        -----END PUBLIC KEY-----" | sed 's/   */\n/g' > "/etc/apk/keys/sgerrand.rsa.pub" && \
+    wget -q -O "/etc/apk/keys/sgerrand.rsa.pub" "https://alpine-pkgs.sgerrand.com/sgerrand.rsa.pub" && \
     wget \
         "$ALPINE_GLIBC_BASE_URL/$ALPINE_GLIBC_PACKAGE_VERSION/$ALPINE_GLIBC_BASE_PACKAGE_FILENAME" \
         "$ALPINE_GLIBC_BASE_URL/$ALPINE_GLIBC_PACKAGE_VERSION/$ALPINE_GLIBC_BIN_PACKAGE_FILENAME" \
@@ -45,7 +36,6 @@ RUN ARCHLINUX_BASE_URL= "https://archive.archlinux.org/packages" && \
     \
     rm -rf "/etc/apk/keys/sgerrand.rsa.pub" && \
     /usr/glibc-compat/bin/localedef -i C -f UTF-8 "$LANG" && \
-    echo "export LANG=$LANG" > /etc/profile.d/locale.sh && \
     \
     apk del glibc-i18n && \
     \
@@ -60,4 +50,5 @@ RUN ARCHLINUX_BASE_URL= "https://archive.archlinux.org/packages" && \
     echo "Asia/Shanghai" > /etc/timezone  && \
     fc-cache -f && \
     fc-list && \
-    rm -rf glibc.apk glibc-bin.apk /var/cache/apk/* /tmp/* 
+    rm -rf /var/cache/apk/* && \
+    rm -rf /tmp/* 
