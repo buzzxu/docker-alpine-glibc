@@ -14,7 +14,7 @@ RUN ARCHLINUX_BASE_URL="https://archive.archlinux.org/packages" && \
     ALPINE_GLIBC_I18N_PACKAGE_FILENAME="glibc-i18n-$ALPINE_GLIBC_PACKAGE_VERSION.apk" && \
     apk add --no-cache --virtual=.build-dependencies wget ca-certificates binutils xz zstd && \
     cd /tmp && \
-    mkdir /tmp/gcc && \
+    mkdir -p /tmp/gcc && \
     wget "${ARCHLINUX_BASE_URL}/g/gcc-libs/gcc-libs-${GCC_LIBS_VERSION}-x86_64.pkg.tar.zst" -O gcc-libs.tar.zst && \
     zstd -d /tmp/gcc-libs.tar.zst --output-dir-flat /tmp && \
     tar -xf /tmp/gcc-libs.tar -C /tmp/gcc && \
