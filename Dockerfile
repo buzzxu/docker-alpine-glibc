@@ -6,7 +6,7 @@ ENV LANG='C.UTF-8' LC_ALL='C.UTF-8'
 ENV TZ Asia/Shanghai
 
 RUN ALPINE_GLIBC_BASE_URL="https://github.com/sgerrand/alpine-pkg-glibc/releases/download" && \
-    ALPINE_GLIBC_PACKAGE_VERSION="2.31-r0" && \
+    ALPINE_GLIBC_PACKAGE_VERSION="2.32-r0" && \
     ALPINE_GLIBC_BASE_PACKAGE_FILENAME="glibc-$ALPINE_GLIBC_PACKAGE_VERSION.apk" && \
     ALPINE_GLIBC_BIN_PACKAGE_FILENAME="glibc-bin-$ALPINE_GLIBC_PACKAGE_VERSION.apk" && \
     ALPINE_GLIBC_I18N_PACKAGE_FILENAME="glibc-i18n-$ALPINE_GLIBC_PACKAGE_VERSION.apk" && \
@@ -42,8 +42,9 @@ RUN ALPINE_GLIBC_BASE_URL="https://github.com/sgerrand/alpine-pkg-glibc/releases
         "$ALPINE_GLIBC_BASE_PACKAGE_FILENAME" \
         "$ALPINE_GLIBC_BIN_PACKAGE_FILENAME" \
         "$ALPINE_GLIBC_I18N_PACKAGE_FILENAME" \
-    apk add --no-cache -U font-adobe-100dpi ttf-dejavu fontconfig tzdata  \ 
-    cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
-    fc-cache -f \
-    fc-list \
+    apk add --no-cache -U font-adobe-100dpi ttf-dejavu fontconfig tzdata && \ 
+    cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \
+    echo "Asia/Shanghai" > /etc/timezone  && \
+    fc-cache -f && \
+    fc-list && \
     rm -rf glibc.apk glibc-bin.apk /var/cache/apk/* /tmp/* 
